@@ -9,10 +9,21 @@ class MyController < ControllerBase
   end 
 
   def render_content(content,content_type)
-    @res.write(content)
-    @res["Content-Type"] = content_type
-    @already_built_response = true 
-    nil
+    if !@already_built_response
+      @res.write(content)
+      @res["Content-Type"] = content_type 
+      @already_built_response = true  
+      nil
+    end
+  end 
+
+  def redirect_to(url)
+      if !@already_built_response
+        @res.status = 302
+        @res["Location"] = url 
+        nil
+        @already_built_response = true 
+      end
   end 
 
   def go
