@@ -8,6 +8,13 @@ class MyController < ControllerBase
     @res = res 
   end 
 
+  def render_content(content,content_type)
+    @res.write(content)
+    @res["Content-Type"] = content_type
+    @already_built_response = true 
+    nil
+  end 
+
   def go
     if req.path == "/cats"
       render_content("hello cats!", "text/html")
