@@ -10,7 +10,6 @@ class MyController < ControllerBase
     template = ERB.new(File.read(template_name))
     template.result(binding)
 
-    
   end
 end
 
